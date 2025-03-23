@@ -18,9 +18,7 @@ jobs:
         with:
           node-version: 20
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 9
+      - uses: pnpm/action-setup@v4
 
       - name: Get pnpm store directory
         shell: bash
@@ -29,7 +27,7 @@ jobs:
 
       - name: Cache pnpm dependencies
         id: pnpm-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ${{ env.STORE_PATH }}
@@ -43,6 +41,7 @@ jobs:
         run: pnpm install
 
   build:
+    name: Build
     needs: install
     runs-on: ubuntu-latest
     steps:
@@ -52,9 +51,7 @@ jobs:
         with:
           node-version: 20
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 9
+      - uses: pnpm/action-setup@v4
           
       - name: Get pnpm store directory
         shell: bash
@@ -95,8 +92,6 @@ jobs:
           node-version: 20
 
       - uses: pnpm/action-setup@v4
-        with:
-          version: 9
           
       - name: Get pnpm store directory
         shell: bash
