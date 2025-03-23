@@ -13,10 +13,6 @@ jobs:
   release-please:
     name: Release Please
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-      
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
     steps:
