@@ -1,119 +1,119 @@
 name: Pull Request Checks
 
 on:
-  pull_request:
-    branches:
-      - main
+    pull_request:
+        branches:
+            - main
 
 jobs:
-  install:
-    name: Install dependencies
-    runs-on: ubuntu-latest
-    outputs:
-      cache-hit: ${{ steps.pnpm-cache.outputs.cache-hit }}
-    steps:
-      - uses: actions/checkout@v4
-      
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
+    install:
+        name: Install dependencies
+        runs-on: ubuntu-latest
+        outputs:
+            cache-hit: ${{ steps.pnpm-cache.outputs.cache-hit }}
+        steps:
+            - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20
 
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+            - uses: pnpm/action-setup@v4
 
-      - name: Cache pnpm dependencies
-        id: pnpm-cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ env.STORE_PATH }}
-            node_modules
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
-      
-      - name: Install dependencies
-        if: steps.pnpm-cache.outputs.cache-hit != 'true'
-        run: pnpm install
+            - name: Get pnpm store directory
+              shell: bash
+              run: |
+                  echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-  build:
-    name: Build
-    needs: install
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
+            - name: Cache pnpm dependencies
+              id: pnpm-cache
+              uses: actions/cache@v4
+              with:
+                  path: |
+                      ${{ env.STORE_PATH }}
+                      node_modules
+                  key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-
 
-      - uses: pnpm/action-setup@v4
-          
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+            - name: Install dependencies
+              if: steps.pnpm-cache.outputs.cache-hit != 'true'
+              run: pnpm install
 
-      - name: Restore pnpm dependencies
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ env.STORE_PATH }}
-            node_modules
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+    build:
+        name: Build
+        needs: install
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
 
-      - name: Cache build output
-        id: build-cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            dist
-            lib
-            build
-          key: ${{ runner.os }}-build-${{ hashFiles('src/**/*.ts', 'tsconfig.json') }}
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20
 
-      - name: Build
-        if: steps.build-cache.outputs.cache-hit != 'true'
-        run: pnpm build
+            - uses: pnpm/action-setup@v4
 
-  test:
-    name: Unit Tests
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
+            - name: Get pnpm store directory
+              shell: bash
+              run: |
+                  echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-      - uses: pnpm/action-setup@v4
-          
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+            - name: Restore pnpm dependencies
+              uses: actions/cache@v4
+              with:
+                  path: |
+                      ${{ env.STORE_PATH }}
+                      node_modules
+                  key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
 
-      - name: Restore pnpm dependencies
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ env.STORE_PATH }}
-            node_modules
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+            - name: Cache build output
+              id: build-cache
+              uses: actions/cache@v4
+              with:
+                  path: |
+                      dist
+                      lib
+                      build
+                  key: ${{ runner.os }}-build-${{ hashFiles('src/**/*.ts', 'tsconfig.json') }}
 
-      - name: Restore build output
-        uses: actions/cache@v4
-        with:
-          path: |
-            dist
-            lib
-            build
-          key: ${{ runner.os }}-build-${{ hashFiles('src/**/*.ts', 'tsconfig.json') }}
+            - name: Build
+              if: steps.build-cache.outputs.cache-hit != 'true'
+              run: pnpm build
 
-      - name: Run tests
-        run: pnpm test
+    test:
+        name: Unit Tests
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+
+            - uses: pnpm/action-setup@v4
+
+            - name: Get pnpm store directory
+              shell: bash
+              run: |
+                  echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+            - name: Restore pnpm dependencies
+              uses: actions/cache@v4
+              with:
+                  path: |
+                      ${{ env.STORE_PATH }}
+                      node_modules
+                  key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+            - name: Restore build output
+              uses: actions/cache@v4
+              with:
+                  path: |
+                      dist
+                      lib
+                      build
+                  key: ${{ runner.os }}-build-${{ hashFiles('src/**/*.ts', 'tsconfig.json') }}
+
+            - name: Run tests
+              run: pnpm test
