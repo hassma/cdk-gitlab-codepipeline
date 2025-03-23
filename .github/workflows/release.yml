@@ -1,13 +1,31 @@
-name: Pull Request Checks
+name: Release
 
 on:
-  pull_request:
+  push:
     branches:
       - main
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config-file: .release-please-config.json
+          manifest-file: .release-please-manifest.json
+
   install:
     name: Install dependencies
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created }}
     runs-on: ubuntu-latest
     outputs:
       cache-hit: ${{ steps.pnpm-cache.outputs.cache-hit }}
@@ -17,6 +35,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          registry-url: 'https://registry.npmjs.org'
 
       - uses: pnpm/action-setup@v4
 
@@ -43,6 +62,7 @@ jobs:
   build:
     name: Build
     needs: install
+    if: ${{ needs.release-please.outputs.release_created }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -50,6 +70,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          registry-url: 'https://registry.npmjs.org'
 
       - uses: pnpm/action-setup@v4
           
@@ -82,7 +103,8 @@ jobs:
 
   test:
     name: Unit Tests
-    needs: build
+    needs: [release-please, build]
+    if: ${{ needs.release-please.outputs.release_created }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -90,6 +112,47 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+
+      - uses: pnpm/action-setup@v4
+          
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Restore pnpm dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ env.STORE_PATH }}
+            node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+      - name: Restore build output
+        uses: actions/cache@v4
+        with:
+          path: |
+            dist
+            lib
+            build
+          key: ${{ runner.os }}-build-${{ hashFiles('src/**/*.ts', 'tsconfig.json') }}
+
+      - name: Run tests
+        run: pnpm test
+
+  publish:
+    name: Publish
+    needs: [release-please, test]
+    if: ${{ needs.release-please.outputs.release_created }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
 
       - uses: pnpm/action-setup@v4
           
@@ -115,5 +178,7 @@ jobs:
             build
           key: ${{ runner.os }}-build-${{ hashFiles('src/**/*.ts', 'tsconfig.json') }}
 
-      - name: Run tests
-        run: pnpm test
+      - name: Publish to NPM
+        run: pnpm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
