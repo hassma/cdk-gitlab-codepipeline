@@ -13,6 +13,6 @@ module.exports = {
 		],
 	},
 	moduleNameMapper: {
-		'^@actions/(.*)$': '<rootDir>/src/gitlab',
+		'^@actions/cdk/(.*)$': '<rootDir>/src/cdk/$1',
 	},
 };
