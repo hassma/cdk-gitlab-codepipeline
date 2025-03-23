@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/hassma/cdk-gitlab-codepipeline/compare/cdk-gitlab-codepipeline-v1.1.0...cdk-gitlab-codepipeline-v1.2.0) (2025-03-23)
+
+
+### Features
+
+* **deps:** update dependency eslint-cdk-plugin to v2 ([#11](https://github.com/hassma/cdk-gitlab-codepipeline/issues/11)) ([de14dd5](https://github.com/hassma/cdk-gitlab-codepipeline/commit/de14dd5da7a5dfe94192c78cd2237db4732ab774))
+
 ## [1.1.0](https://github.com/hassma/cdk-gitlab-codepipeline/compare/cdk-gitlab-codepipeline-v1.0.0...cdk-gitlab-codepipeline-v1.1.0) (2025-03-23)
 
 ### Features
