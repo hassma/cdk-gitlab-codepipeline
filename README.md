@@ -1,13 +1,15 @@
 # AWS Pipeline Tools
 
+[![Pull Request Checks](https://github.com/hassma/cdk-gitlab-codepipeline/actions/workflows/pr.yml/badge.svg?branch=main)](https://github.com/hassma/cdk-gitlab-codepipeline/actions/workflows/pr.yml) [![Release](https://github.com/hassma/cdk-gitlab-codepipeline/actions/workflows/release.yml/badge.svg)](https://github.com/hassma/cdk-gitlab-codepipeline/actions/workflows/release.yml)
+
 A collection of AWS CDK constructs and custom actions that extend AWS CodePipeline capabilities, primarily focused on GitLab integration.
 
 ## Features
 
 - GitLab Source Action for AWS CodePipeline
 - Multiple trigger strategies:
-    - Webhook-based triggering for automatic pipeline execution
-    - Manual triggering for controlled deployments
+  - Webhook-based triggering for automatic pipeline execution
+  - Manual triggering for controlled deployments
 - Secure OAuth token handling via AWS Secrets Manager
 - Configurable branch selection
 - Support for both GitLab Cloud and self-hosted instances
