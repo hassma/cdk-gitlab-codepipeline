@@ -1,4 +1,3 @@
-
 // Define a generic event type.
 type GenericEvent = { [key: string]: any };
 

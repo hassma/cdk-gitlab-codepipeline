@@ -53,10 +53,10 @@ export const handler = async (event: CodePipelineEvent) => {
 			return;
 		}
 	} catch (error: any) {
-    // Rethrow environment validation errors
-    if (error.message?.includes('environment variable is not set')) {
-      throw error;
-    }
+		// Rethrow environment validation errors
+		if (error.message?.includes('environment variable is not set')) {
+			throw error;
+		}
 		if (error instanceof JobPollingError) {
 			// For polling failures, just log and exit - don't try to stop pipeline
 			await errorHandler.handleFailure(event, error, undefined, false);
