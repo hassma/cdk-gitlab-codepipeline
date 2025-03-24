@@ -4,6 +4,10 @@
 
 A collection of AWS CDK constructs and custom actions that extend AWS CodePipeline capabilities, primarily focused on GitLab integration.
 
+## Remarks
+
+*The library is still in early development and will change quite frequently. So be aware of bugs.*
+
 ## Features
 
 - GitLab Source Action for AWS CodePipeline
