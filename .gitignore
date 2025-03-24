@@ -208,6 +208,7 @@ cdk.context.json
 docs
 
 dist
+package
 
 .roo
 .cline*
