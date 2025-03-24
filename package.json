@@ -20,9 +20,7 @@
 		"test": "jest --config jest.config.js",
 		"lint": "eslint .",
 		"format": "prettier --write .",
-		"build": "tsc",
-		"publish": "pnpm publish",
-		"package": "pnpm pack"
+		"build": "tsc"
 	},
 	"repository": {
 		"url": "https://github.com/hassma/cdk-gitlab-codepipeline",
