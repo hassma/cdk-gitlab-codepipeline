@@ -1,7 +1,7 @@
-import { handler, RequestType } from '@actions/cdk/gitlab/lambda/cr-handler';
 import { GetSecretValueCommand, SecretsManagerClient } from '@aws-sdk/client-secrets-manager';
 import { DeleteParameterCommand, GetParameterCommand, PutParameterCommand, SSMClient } from '@aws-sdk/client-ssm';
 import { mockClient } from 'aws-sdk-client-mock';
+import { crHandler as handler, RequestType } from '../src';
 
 // Mock AWS services
 const secretsManagerMock = mockClient(SecretsManagerClient);
