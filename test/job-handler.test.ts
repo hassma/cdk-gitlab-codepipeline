@@ -1,5 +1,3 @@
-import { handler } from '@actions/cdk/gitlab/lambda/job-handler';
-import { CodePipelineEvent } from '@actions/cdk/gitlab/lambda/job-handler/types';
 import { BatchGetBuildsCommand, CodeBuildClient, StartBuildCommand } from '@aws-sdk/client-codebuild';
 import {
 	AcknowledgeJobCommand,
@@ -8,6 +6,8 @@ import {
 	PutJobSuccessResultCommand,
 } from '@aws-sdk/client-codepipeline';
 import { mockClient } from 'aws-sdk-client-mock';
+import { jobHandler as handler } from '../src';
+import { CodePipelineEvent } from '../src/types';
 
 // Mock AWS services
 const codeBuildMock = mockClient(CodeBuildClient);

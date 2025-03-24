@@ -21,10 +21,8 @@
 		"strictPropertyInitialization": false,
 		"esModuleInterop": true,
 		"typeRoots": ["./node_modules/@types"],
-		"paths": {
-			"@actions/cdk/*": ["src/cdk/*"]
-		}
+		"paths": {}
 	},
-	"include": ["index.ts", "src/**/*.ts", "test/**/*.ts"],
+	"include": ["src/**/*.ts", "test/**/*.ts"],
 	"exclude": ["node_modules"]
 }

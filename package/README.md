@@ -29,7 +29,7 @@ yarn add aws-pipeline-tools
 ### Basic Example
 
 ```typescript
-import { GitLabSourceAction, GitlabTrigger } from 'cdk-gitlab-codepipeline';
+import { GitLabSourceAction, GitlabTrigger } from 'aws-pipeline-tools';
 
 // Create a GitLab source action with webhook trigger
 new GitLabSourceAction(this, GitlabTrigger.WEBHOOK, {

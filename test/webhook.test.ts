@@ -1,8 +1,7 @@
-import { handler } from '@actions/cdk/gitlab/lambda/webhook';
-import { GitlabPushEvent, HandlerEvent } from '@actions/cdk/gitlab/lambda/webhook/types';
 import { CodePipelineClient, StartPipelineExecutionCommand } from '@aws-sdk/client-codepipeline';
 import { GetSecretValueCommand, SecretsManagerClient } from '@aws-sdk/client-secrets-manager';
 import { mockClient } from 'aws-sdk-client-mock';
+import { GitlabPushEvent, webhookHandler as handler, HandlerEvent } from '../src';
 
 // Mock AWS services
 const codePipelineMock = mockClient(CodePipelineClient);

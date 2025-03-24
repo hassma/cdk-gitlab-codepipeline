@@ -16,14 +16,6 @@
 		"!**/*.test.*",
 		"!test/**"
 	],
-	"scripts": {
-		"test": "jest --config jest.config.js",
-		"lint": "eslint .",
-		"format": "prettier --write .",
-		"build": "tsc",
-		"publish": "pnpm publish",
-		"package": "pnpm pack"
-	},
 	"repository": {
 		"url": "https://github.com/hassma/cdk-gitlab-codepipeline",
 		"type": "git"
@@ -64,5 +56,11 @@
 		"aws-cdk-lib": "^2.0.0",
 		"constructs": "^10.0.0"
 	},
-	"packageManager": "pnpm@9.15.4"
+	"scripts": {
+		"test": "jest --config jest.config.js",
+		"lint": "eslint .",
+		"format": "prettier --write .",
+		"build": "tsc",
+		"package": "pnpm pack"
+	}
 }
