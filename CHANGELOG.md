@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/hassma/cdk-gitlab-codepipeline/compare/cdk-gitlab-codepipeline-v1.2.0...cdk-gitlab-codepipeline-v1.3.0) (2025-03-24)
+
+
+### Features
+
+* edit entrypoint and fix it for better use ([#16](https://github.com/hassma/cdk-gitlab-codepipeline/issues/16)) ([e3088af](https://github.com/hassma/cdk-gitlab-codepipeline/commit/e3088af299f9afffc7921afb67f91e36d907f726))
+
 ## [1.2.0](https://github.com/hassma/cdk-gitlab-codepipeline/compare/cdk-gitlab-codepipeline-v1.1.0...cdk-gitlab-codepipeline-v1.2.0) (2025-03-23)
 
 ### Features
