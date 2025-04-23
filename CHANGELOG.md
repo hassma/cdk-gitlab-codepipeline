@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.4](https://github.com/hassma/cdk-gitlab-codepipeline/compare/cdk-gitlab-codepipeline-v1.3.3...cdk-gitlab-codepipeline-v1.3.4) (2025-04-23)
+
+
+### Bug Fixes
+
+* **deps:** update all non-major dependencies ([#26](https://github.com/hassma/cdk-gitlab-codepipeline/issues/26)) ([16d56bb](https://github.com/hassma/cdk-gitlab-codepipeline/commit/16d56bbc75852ee38c108309b5bc03cfae10b143))
+
 ## [1.3.3](https://github.com/hassma/cdk-gitlab-codepipeline/compare/cdk-gitlab-codepipeline-v1.3.2...cdk-gitlab-codepipeline-v1.3.3) (2025-04-07)
 
 

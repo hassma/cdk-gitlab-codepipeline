@@ -1,6 +1,6 @@
 {
 	"name": "cdk-gitlab-codepipeline",
-	"version": "1.3.3",
+	"version": "1.3.4",
 	"description": "AWS CDK Custom CodePipeline Source Action for GitLab",
 	"main": "dist/src/index.js",
 	"types": "dist/src/index.d.ts",
