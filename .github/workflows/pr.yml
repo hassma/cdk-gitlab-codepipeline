@@ -12,7 +12,7 @@ jobs:
         outputs:
             cache-hit: ${{ steps.pnpm-cache.outputs.cache-hit }}
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
 
             - uses: actions/setup-node@v4
               with:
@@ -45,7 +45,7 @@ jobs:
         needs: install
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
 
             - uses: actions/setup-node@v4
               with:
@@ -85,7 +85,7 @@ jobs:
         needs: build
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
 
             - uses: actions/setup-node@v4
               with:
