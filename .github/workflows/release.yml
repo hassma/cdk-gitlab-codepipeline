@@ -30,7 +30,7 @@ jobs:
         outputs:
             cache-hit: ${{ steps.pnpm-cache.outputs.cache-hit }}
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
 
             - uses: actions/setup-node@v4
               with:
@@ -65,7 +65,7 @@ jobs:
         if: ${{ needs.release-please.outputs.release_created }}
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
 
             - uses: actions/setup-node@v4
               with:
@@ -107,7 +107,7 @@ jobs:
         if: ${{ needs.release-please.outputs.release_created }}
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
 
             - uses: actions/setup-node@v4
               with:
@@ -147,7 +147,7 @@ jobs:
         if: ${{ needs.release-please.outputs.release_created }}
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
 
             - uses: actions/setup-node@v4
               with:
